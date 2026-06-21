@@ -98,17 +98,6 @@ Dashboard:
 * My Listings
 * Profile
 
----
-
-## Project Structure
-
-```plaintext
-frontend/
-backend/
-```
-
----
-
 ## Author
 
-Student Project Submission
+Nkonganyi Blec Ketu
