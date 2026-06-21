@@ -20,3 +20,21 @@ export const findById =
    id
  );
 };
+
+export const updateProfile =
+(id, data)=>{
+ return User.findByIdAndUpdate(
+   id,
+   data,
+   { new: true }
+ );
+};
+
+export const updatePassword =
+(id, password)=>{
+ return User.findByIdAndUpdate(
+   id,
+   { password },
+   { new: true }
+ );
+};

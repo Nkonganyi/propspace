@@ -1,1 +1,298 @@
 @import "tailwindcss";
+
+@theme {
+  /* Primary (blue) ramp */
+  --color-primary-50: #EFF6FF;
+  --color-primary-100: #DBEAFE;
+  --color-primary-200: #BFDBFE;
+  --color-primary-300: #93C5FD;
+  --color-primary-400: #60A5FA;
+  --color-primary-500: #2563EB;
+  --color-primary: #2563EB;
+  --color-primary-600: #1D4ED8;
+  --color-primary-700: #1E40AF;
+  --color-primary-800: #1E3A8A;
+  --color-primary-900: #172554;
+
+  /* Accent (sky) ramp */
+  --color-accent-50: #F0F9FF;
+  --color-accent-100: #E0F2FE;
+  --color-accent-200: #BAE6FD;
+  --color-accent-300: #7DD3FC;
+  --color-accent-400: #38BDF8;
+  --color-accent-500: #0EA5E9;
+  --color-accent: #0EA5E9;
+  --color-accent-600: #0284C7;
+  --color-accent-700: #0369A1;
+  --color-accent-800: #075985;
+  --color-accent-900: #0C4A6E;
+
+  /* Neutrals */
+  --color-slate-50: #F8FAFC;
+  --color-slate-100: #F1F5F9;
+  --color-slate-200: #E2E8F0;
+  --color-slate-300: #CBD5E1;
+  --color-slate-400: #94A3B8;
+  --color-slate-500: #64748B;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1E293B;
+  --color-slate-900: #0F172A;
+
+  /* Success (green) */
+  --color-success-50: #F0FDF4;
+  --color-success-100: #DCFCE7;
+  --color-success-200: #BBF7D0;
+  --color-success-500: #16A34A;
+  --color-success: #16A34A;
+  --color-success-600: #15803D;
+  --color-success-700: #14532D;
+
+  /* Error (red) */
+  --color-error-50: #FEF2F2;
+  --color-error-100: #FEE2E2;
+  --color-error-200: #FECACA;
+  --color-error-500: #DC2626;
+  --color-error: #DC2626;
+  --color-error-600: #B91C1C;
+  --color-error-700: #991B1B;
+
+  /* Semantic aliases */
+  --color-background: var(--color-slate-50);
+  --color-card: #FFFFFF;
+  --color-border: var(--color-slate-200);
+  --color-muted: var(--color-slate-500);
+  --color-text: var(--color-slate-900);
+
+  /* Shared radii / shadows used as design tokens */
+  --radius-card: 1rem;
+  --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 3px 0 rgb(15 23 42 / 0.06);
+  --shadow-card-hover: 0 12px 24px -8px rgb(15 23 42 / 0.16), 0 4px 8px -4px rgb(15 23 42 / 0.08);
+}
+
+/* Base reset — kept inside @layer base (instead of unlayered) so that
+   Tailwind's own utilities (e.g. mx-auto, mb-*, gap-*) can still override
+   these defaults. Unlayered CSS always wins over @layer rules regardless
+   of specificity, which previously broke every margin/auto-centering
+   utility in the app — this fixes that without changing any behavior. */
+@layer base {
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-slate-900);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+  }
+
+  img, svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Visible keyboard focus, kept consistent with the focus rings used on
+     interactive elements below */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--color-primary-400);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-900);
+  }
+
+  /* Slim, on-brand scrollbar (progressive enhancement, no effect on behavior) */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-slate-300);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-slate-400);
+    background-clip: content-box;
+  }
+}
+
+/* NOTE on usage: Tailwind v4 cannot @apply one custom component class
+   inside another, so each pair below is meant to be combined directly in
+   markup, e.g. className="btn btn-primary" or className="badge badge-primary" */
+@layer components {
+  /* ---------- Buttons (combine .btn with one variant) ---------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3
+      text-sm font-semibold transition-all duration-200 ease-in-out
+      disabled:opacity-50 disabled:cursor-not-allowed select-none;
+  }
+  .btn-primary {
+    @apply text-white shadow-sm
+      bg-gradient-to-r from-primary to-accent
+      hover:shadow-md hover:brightness-105
+      active:brightness-95;
+  }
+  .btn-secondary {
+    @apply bg-primary-50 text-primary-700 shadow-sm
+      hover:bg-primary-100 hover:shadow-md;
+  }
+  .btn-ghost {
+    @apply bg-white text-slate-700 border border-slate-200 shadow-sm
+      hover:bg-slate-50 hover:shadow-md;
+  }
+  .btn-danger {
+    @apply bg-error-50 text-error-600 shadow-sm
+      hover:bg-error-100 hover:shadow-md;
+  }
+  .btn-success {
+    @apply text-white bg-success shadow-sm
+      hover:bg-success-600 hover:shadow-md;
+  }
+
+  /* ---------- Forms ---------- */
+  .field-label {
+    @apply block text-sm font-semibold text-slate-700 mb-2;
+  }
+  .field-input {
+    @apply w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-white
+      text-slate-900 placeholder-slate-400 shadow-sm
+      transition-all duration-200 ease-in-out
+      focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/15;
+  }
+  /* combine with .field-input: className="field-input field-select" */
+  .field-select {
+    @apply appearance-none bg-no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2364748B'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-position: right 0.9rem center;
+    background-size: 1.1rem;
+    padding-right: 2.75rem;
+  }
+
+  /* ---------- Surfaces ---------- */
+  .surface-card {
+    @apply bg-white rounded-2xl border border-slate-200;
+    box-shadow: var(--shadow-card);
+  }
+  /* combine with .surface-card: className="surface-card surface-card-hover" */
+  .surface-card-hover {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  .surface-card-hover:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-4px);
+  }
+
+  /* ---------- Badges (combine .badge with one variant) ---------- */
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+  .badge-primary {
+    @apply bg-primary-50 text-primary-700;
+  }
+  .badge-accent {
+    @apply bg-accent-50 text-accent-700;
+  }
+  .badge-neutral {
+    @apply bg-slate-100 text-slate-600;
+  }
+  .badge-success {
+    @apply bg-success-50 text-success-700;
+  }
+  .badge-error {
+    @apply bg-error-50 text-error-600;
+  }
+
+  /* ---------- Alerts ---------- */
+  .alert-error {
+    @apply flex items-center justify-center gap-2 rounded-2xl border border-error-200
+      bg-error-50 px-5 py-4 text-center text-sm font-medium text-error-600;
+  }
+  .alert-success {
+    @apply flex items-center justify-center gap-2 rounded-2xl border border-success-200
+      bg-success-50 px-5 py-4 text-center text-sm font-medium text-success-700;
+  }
+
+  /* ---------- Layout ---------- */
+  .page-shell {
+    @apply min-h-screen bg-slate-50;
+  }
+  .container-page {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+  }
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+  .animate-pulse-slow {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Decorative, CSS-only blurred orbs used to build empty states / hero
+     backdrops without any image assets */
+  .blob {
+    border-radius: 50%;
+    filter: blur(40px);
+    pointer-events: none;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceSubtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

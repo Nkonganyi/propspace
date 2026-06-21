@@ -78,7 +78,9 @@ export const login = async(data)=>{
    user:{
      id:user._id,
      username:user.username,
-     email:user.email
+     email:user.email,
+     phone:user.phone,
+     avatar:user.avatar
    }
 
  };

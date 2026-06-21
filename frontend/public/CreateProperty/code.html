@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PropSpace | Create Listing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#b7c8e1",
+                    "tertiary-container": "#0b1c30",
+                    "inverse-primary": "#bec6e0",
+                    "on-background": "#191c1e",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-secondary-container": "#fefcff",
+                    "surface-container": "#eceef0",
+                    "outline": "#76777d",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-container": "#131b2e",
+                    "primary-fixed": "#dae2fd",
+                    "tertiary-fixed": "#d3e4fe",
+                    "on-secondary-fixed-variant": "#004395",
+                    "surface": "#f7f9fb",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1e",
+                    "surface-container-high": "#e6e8ea",
+                    "on-secondary-fixed": "#001a42",
+                    "secondary-container": "#2170e4",
+                    "on-primary-container": "#7c839b",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#000000",
+                    "on-tertiary-fixed-variant": "#38485d",
+                    "outline-variant": "#c6c6cd",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#0058be",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#131b2e",
+                    "on-surface-variant": "#45464d",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "on-tertiary-fixed": "#0b1c30",
+                    "background": "#f7f9fb",
+                    "primary": "#000000",
+                    "inverse-surface": "#2d3133",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f7f9fb",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "on-tertiary-container": "#75859d",
+                    "primary-fixed-dim": "#bec6e0",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-tint": "#565e74",
+                    "surface-dim": "#d8dadc",
+                    "surface-variant": "#e0e3e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "sm": "16px",
+                    "max-width": "1280px",
+                    "xs": "8px",
+                    "margin-desktop": "auto",
+                    "lg": "40px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .form-card {
+            border: 1px solid #E2E8F0;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .form-card:hover {
+            border-color: #0058be;
+            box-shadow: 0px 4px 20px rgba(15, 23, 42, 0.08);
+        }
+        .step-active {
+            color: #0058be;
+            border-bottom: 2px solid #0058be;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #0058be;
+            box-shadow: 0 0 0 2px rgba(33, 112, 228, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Shell Container -->
+<div class="flex min-h-screen">
+<!-- SideNavBar Anchor -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-on-background border-r border-outline-variant dark:border-outline flex flex-col p-sm z-50">
+<div class="mb-lg px-xs">
+<span class="text-headline-md font-headline-md font-bold text-primary">PropSpace</span>
+</div>
+<nav class="flex-1 space-y-xs">
+<!-- Dashboard -->
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- My Listings (Active) -->
+<a class="flex items-center gap-sm px-sm py-xs bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="home_work">home_work</span>
+<span class="font-label-md text-label-md">My Listings</span>
+</a>
+<!-- Messages -->
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-label-md text-label-md">Messages</span>
+</a>
+<!-- Analytics -->
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-transform scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-sm space-y-xs">
+<div class="flex items-center gap-sm px-sm py-xs mb-sm">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a real estate agent in a modern corporate environment. The agent, a confident man in his late 30s wearing a sharp charcoal suit and white shirt, is smiling warmly towards the camera. The background is a blurred high-end office with soft light-mode aesthetics and blue accents. Professional studio lighting highlights the textures of the suit and the clarity of the agent's expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC838vTTzQle_z5lYM5XBAXCystIIpG827g7J41S6iXzU19hVTAtbuc76xEqsGrAvo9b0bqda_Y9pt_9nUgvr-QlxE-T7CKTXvIPgXcUmLkq-B_lCLIdXJd0S0AC-GKyhIg73Yn4fTGNcznqdMADgDR5aOKc9PcA_K6A-ABTZj_C3ysZobYu7kbtDpc1cfEfo5_IydAEY0K5zcRZcQj2Vlttf1KV4koD5xjEws-_ixOvBBDK6cLYnxIfcvut7HfcEcXq3hbC3hTn70"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold">Welcome back</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Verified Partner</span>
+</div>
+</div>
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:bg-surface-container-high rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:bg-surface-container-high rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 p-lg max-w-max-width mx-auto">
+<!-- Header -->
+<header class="mb-xl">
+<h1 class="font-headline-xl text-headline-xl text-primary mb-xs">Create New Listing</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Showcase your property to thousands of potential buyers and renters. Fill in the details below to get started.</p>
+</header>
+<!-- Form Progress (Asymmetric Tabs) -->
+<div class="flex gap-lg border-b border-outline-variant mb-lg">
+<button class="pb-sm font-label-md text-label-md step-active transition-all">Basic Information</button>
+<button class="pb-sm font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-all">Media &amp; Photos</button>
+<button class="pb-sm font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-all">Details &amp; Features</button>
+<button class="pb-sm font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-all">Publish</button>
+</div>
+<!-- Form Content -->
+<form class="space-y-lg" id="listing-form">
+<!-- Section 1: Core Details (Bento-style layout) -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Left: Main Fields -->
+<div class="col-span-12 lg:col-span-8 space-y-md">
+<div class="form-card bg-surface-container-lowest p-md rounded-lg">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Property Title</label>
+<input class="w-full bg-surface border border-outline-variant rounded p-sm text-body-md font-body-md" placeholder="e.g. Modern Minimalist Villa with Ocean View" required="" type="text"/>
+<p class="mt-xs text-label-sm font-label-sm text-on-surface-variant">A catchy title helps your listing stand out in search results.</p>
+</div>
+<div class="form-card bg-surface-container-lowest p-md rounded-lg">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Description</label>
+<textarea class="w-full bg-surface border border-outline-variant rounded p-sm text-body-md font-body-md" placeholder="Describe the property's unique features, neighborhood, and amenities..." required="" rows="6"></textarea>
+</div>
+</div>
+<!-- Right: Quick Specs -->
+<div class="col-span-12 lg:col-span-4 space-y-md">
+<div class="form-card bg-surface-container-lowest p-md rounded-lg">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Price (USD)</label>
+<div class="relative">
+<span class="absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">$</span>
+<input class="w-full bg-surface border border-outline-variant rounded p-sm pl-md text-body-md font-body-md" placeholder="0.00" required="" type="number"/>
+</div>
+</div>
+<div class="form-card bg-surface-container-lowest p-md rounded-lg">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Property Type</label>
+<select class="w-full bg-surface border border-outline-variant rounded p-sm text-body-md font-body-md appearance-none" required="">
+<option value="">Select type</option>
+<option value="apartment">Apartment</option>
+<option value="villa">Villa / House</option>
+<option value="commercial">Commercial Space</option>
+<option value="land">Land / Plot</option>
+</select>
+</div>
+<div class="form-card bg-surface-container-lowest p-md rounded-lg">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Listing Purpose</label>
+<div class="flex gap-xs">
+<button class="flex-1 py-xs rounded border-2 border-secondary bg-secondary-container text-on-secondary-container font-label-md text-label-md" type="button">For Sale</button>
+<button class="flex-1 py-xs rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" type="button">For Rent</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Location (Horizontal Layout) -->
+<div class="form-card bg-surface-container-lowest p-md rounded-lg">
+<h3 class="font-headline-md text-headline-md mb-md">Location Details</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">City</label>
+<input class="w-full bg-surface border border-outline-variant rounded p-sm text-body-md font-body-md" placeholder="e.g. Dubai" required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Country</label>
+<input class="w-full bg-surface border border-outline-variant rounded p-sm text-body-md font-body-md" placeholder="e.g. United Arab Emirates" required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs">Zip / Postal Code</label>
+<input class="w-full bg-surface border border-outline-variant rounded p-sm text-body-md font-body-md" placeholder="00000" type="text"/>
+</div>
+</div>
+<div class="mt-md h-48 rounded bg-surface-container-high relative overflow-hidden flex items-center justify-center">
+<div class="absolute inset-0 bg-cover bg-center opacity-60" data-location="Dubai, UAE" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBgnmBJyNoVxj-7M85Jk-K7LiaJ3bIZWAQwSP-MsI_gh3SEaN-j6gBeaeNLZ2HofNMeKMvMsXLaMwRX8Luha6Zzj_l1EdyGqVw2b_KWtHrA1l9MJnnOoG3vtf379Q2u--z_y8bysx1bp3WSMepessWbo_RWq0yiutwWqEMHsJ-c75Z1SYfKxBhynzSbkXy1mXoKYSmQKyMhfgwCbF_R8ENXbb-bEOCdYvsKVcFUJ0RHY0inSkObzjf2GicnPbo0Zikltk8OW-JMymc')"></div>
+<div class="relative z-10 text-center">
+<span class="material-symbols-outlined text-secondary text-4xl mb-xs" data-icon="location_on">location_on</span>
+<p class="font-label-md text-label-md text-primary bg-surface/80 px-sm py-xs rounded-full backdrop-blur-sm shadow-sm">Interactive Map Integration</p>
+</div>
+</div>
+</div>
+<!-- Section 3: Media Upload -->
+<div class="form-card bg-surface-container-lowest p-md rounded-lg">
+<h3 class="font-headline-md text-headline-md mb-xs">Media Gallery</h3>
+<p class="text-on-surface-variant font-label-sm text-label-sm mb-md">High-quality photos increase engagement by up to 80%.</p>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-sm">
+<!-- Upload Trigger -->
+<div class="aspect-square rounded border-2 border-dashed border-outline-variant flex flex-col items-center justify-center cursor-pointer hover:border-secondary transition-colors group">
+<span class="material-symbols-outlined text-outline group-hover:text-secondary text-3xl" data-icon="add_a_photo">add_a_photo</span>
+<span class="font-label-sm text-label-sm text-outline mt-xs">Add Photo</span>
+</div>
+<!-- Mock Preview 1 -->
+<div class="aspect-square rounded overflow-hidden relative group">
+<img class="w-full h-full object-cover" data-alt="A wide-angle high-resolution photograph of a sun-drenched modern living room in a luxury villa. The space features floor-to-ceiling windows overlooking a crystal blue pool and Mediterranean horizon. Minimalist white furniture, a large plush grey rug, and subtle blue decorative accents define the interior. The lighting is natural and airy, creating a professional real estate marketing aesthetic with soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBohWllu9oWJ6KbEXVs7lHxyOsoSCmx7gxvPjCviBYp6tTVQBK6bbUvbgN-sDKsZv9mDPiSn2UShKss0VKdcQNKILQPK2ybwRH3LE7d2LGflk37PhAb56Inj69GOfc85xcAWTCMcYiF8fKGTdZI602n3fE1h4G4Gzug-Xv5_mqB9n_OaCg0NP3ufWQK1oqOHFwIrRnuE1oRn9gIABH_ui_lfNjV2vsUxNUFhsqDRowEmuNzoHJ9LT0LIszt_h8FyPyNO1yG_Bw3hFo"/>
+<button class="absolute top-xs right-xs bg-error text-white p-xs rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+</div>
+<!-- Mock Preview 2 -->
+<div class="aspect-square rounded overflow-hidden relative group">
+<img class="w-full h-full object-cover" data-alt="An interior shot of a sleek, contemporary kitchen with dark marble countertops and handle-less navy blue cabinetry. Built-in high-end stainless steel appliances are visible. The kitchen island has three designer bar stools. The lighting is warm and recessed, giving the space a sophisticated corporate-luxe feel. The composition is crisp and geometrically balanced, suitable for a premium real estate listing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqJgMCU7ATCHpnpVfqODumsdazHIn7GiYAzix6akKNnIIiI7ItXBUoscCz5YGgAYuyrAHqdfWCiJGwC5GsfLlAS38nXQjw8iWV-rY4ArfyUGnSEvopcTwmjhHhwC3Xz7MWUlEH006ojxxKsPlNUK7V-hdFbyI8hndVbTsF6tRiGbRHS-4vFjHr9NzZCr7Alkqhqz2bRhQDMu7Hj4Hay0ZuhLlBPZibePzUEPo99qbTrWjypbQP9eDgeD4w4S1HOWqR2t6_iZkg_po"/>
+<button class="absolute top-xs right-xs bg-error text-white p-xs rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-md pt-lg border-t border-outline-variant">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+<span class="font-label-sm text-label-sm">Your progress is automatically saved to drafts.</span>
+</div>
+<div class="flex gap-sm w-full md:w-auto">
+<button class="flex-1 md:flex-none px-xl py-sm rounded-lg border border-outline-variant font-label-md text-label-md text-on-surface hover:bg-surface-container-high transition-all" type="button">Save Draft</button>
+<button class="flex-1 md:flex-none px-xl py-sm rounded-lg bg-secondary text-on-secondary font-label-md text-label-md hover:brightness-110 shadow-md transition-all active:scale-95" type="submit">Publish Listing</button>
+</div>
+</div>
+</form>
+<!-- Footer Anchor -->
+<footer class="w-full mt-xl border-t border-outline-variant dark:border-outline flex flex-col md:flex-row justify-between items-center py-lg px-md">
+<span class="text-headline-md font-headline-md font-bold text-primary mb-md md:mb-0">PropSpace</span>
+<div class="flex flex-wrap justify-center gap-md mb-md md:mb-0">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary underline transition-all" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary underline transition-all" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary underline transition-all" href="#">Cookie Settings</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary underline transition-all" href="#">Contact Us</a>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-80">© 2024 PropSpace Real Estate Technologies. All rights reserved.</p>
+</footer>
+</main>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple form validation visual feedback
+        const form = document.getElementById('listing-form');
+        const inputs = form.querySelectorAll('input, select, textarea');
+
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => {
+                if (!input.checkValidity()) {
+                    input.classList.add('border-error');
+                    input.classList.remove('border-outline-variant');
+                } else {
+                    input.classList.remove('border-error');
+                    input.classList.add('border-outline-variant');
+                }
+            });
+        });
+
+        // Publish action simulation
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm" data-icon="sync">sync</span> Processing...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Success! Your listing is being processed and will be live shortly.');
+                submitBtn.innerHTML = 'Publish Listing';
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+
+        // Tab Switching Emulation (Visual only)
+        const tabs = document.querySelectorAll('button.step-active, button.text-on-surface-variant');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('step-active');
+                    t.classList.add('text-on-surface-variant');
+                });
+                tab.classList.add('step-active');
+                tab.classList.remove('text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

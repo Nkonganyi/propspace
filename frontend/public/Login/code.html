@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | PropSpace Real Estate</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#bec6e0",
+                    "inverse-primary": "#bec6e0",
+                    "background": "#f7f9fb",
+                    "outline": "#76777d",
+                    "tertiary-container": "#0b1c30",
+                    "surface-dim": "#d8dadc",
+                    "on-surface": "#191c1e",
+                    "secondary-container": "#2170e4",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#0058be",
+                    "on-secondary-fixed": "#001a42",
+                    "on-tertiary-fixed": "#0b1c30",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#565e74",
+                    "surface-container": "#eceef0",
+                    "secondary-fixed": "#d8e2ff",
+                    "surface-container-low": "#f2f4f6",
+                    "surface-container-high": "#e6e8ea",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e0e3e5",
+                    "on-surface-variant": "#45464d",
+                    "primary-fixed": "#dae2fd",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary-fixed-variant": "#38485d",
+                    "on-primary-container": "#7c839b",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-background": "#191c1e",
+                    "inverse-surface": "#2d3133",
+                    "outline-variant": "#c6c6cd",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "error": "#ba1a1a",
+                    "surface": "#f7f9fb",
+                    "on-primary-fixed": "#131b2e",
+                    "primary": "#000000",
+                    "on-secondary-container": "#fefcff",
+                    "tertiary-fixed-dim": "#b7c8e1",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#d3e4fe",
+                    "tertiary": "#000000",
+                    "primary-container": "#131b2e",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-tertiary-container": "#75859d",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "xs": "8px",
+                    "xl": "64px",
+                    "sm": "16px",
+                    "margin-desktop": "auto",
+                    "lg": "40px",
+                    "md": "24px",
+                    "margin-mobile": "16px",
+                    "max-width": "1280px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .form-input-focus:focus {
+            outline: none;
+            border-color: #0058be;
+            box-shadow: 0 0 0 2px rgba(0, 88, 190, 0.15);
+        }
+        .floating-interaction {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .floating-interaction:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="overflow-hidden">
+<main class="flex min-h-screen">
+<!-- Left Section: Form (The Canvas) -->
+<div class="flex flex-col w-full lg:w-[40%] bg-surface-container-lowest p-md lg:p-xl overflow-y-auto">
+<!-- Branding Header -->
+<div class="flex items-center mb-xl">
+<span class="text-headline-md font-headline-md font-bold text-primary mr-2">PropSpace</span>
+</div>
+<!-- Login Content -->
+<div class="max-w-md mx-auto w-full flex flex-col justify-center flex-grow py-md">
+<header class="mb-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Welcome back</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Access your professional real estate portfolio and market insights.</p>
+</header>
+<!-- Social Login Cluster -->
+<div class="flex flex-col gap-sm mb-lg">
+<button class="flex items-center justify-center gap-xs w-full py-3 px-md border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors duration-200">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                        Continue with Google
+                    </button>
+<button class="flex items-center justify-center gap-xs w-full py-3 px-md border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors duration-200">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+<path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C4.83 17.5 4.14 11.2 6.55 7.15c1.2-2.02 3.12-3.22 5.06-3.22 1.94.02 3.04 1.16 4.38 1.16 1.34 0 2.76-1.34 4.88-1.13 1.94.18 3.4 1.05 4.33 2.52-3.9 2.1-3.2 7.4.7 9.04-.75 2.05-1.78 4.05-3.05 4.76zM15.47 3.38c-.9 1.12-2.3 1.94-3.66 1.83-.16-1.4.52-2.88 1.3-3.76.9-.96 2.37-1.8 3.55-1.85.18 1.4-.42 2.84-1.19 3.78z"></path>
+</svg>
+                        Continue with Apple
+                    </button>
+</div>
+<!-- Divider -->
+<div class="relative mb-lg flex items-center">
+<div class="flex-grow border-t border-outline-variant"></div>
+<span class="flex-shrink mx-4 font-label-sm text-label-sm text-on-surface-variant">or use email</span>
+<div class="flex-grow border-t border-outline-variant"></div>
+</div>
+<!-- Form -->
+<form action="#" class="space-y-md" method="POST" onsubmit="return false;">
+<div class="space-y-xs">
+<label class="block font-label-md text-label-md text-on-surface" for="email">Email address</label>
+<input class="w-full px-md py-3 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface font-body-md form-input-focus transition-all duration-200" id="email" name="email" placeholder="name@company.com" required="" type="email"/>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between items-center">
+<label class="block font-label-md text-label-md text-on-surface" for="password">Password</label>
+<a class="font-label-sm text-label-sm text-secondary hover:underline" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<input class="w-full px-md py-3 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface font-body-md form-input-focus transition-all duration-200" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center">
+<input class="h-4 w-4 rounded border-outline-variant text-secondary focus:ring-secondary" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-2 block font-label-sm text-label-sm text-on-surface-variant" for="remember-me">Remember me for 30 days</label>
+</div>
+<button class="w-full py-4 bg-secondary text-on-secondary font-label-md text-label-md rounded-lg shadow-sm hover:brightness-110 active:scale-[0.98] transition-all duration-200 flex justify-center items-center gap-xs" type="submit">
+                        Sign In
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</form>
+<footer class="mt-lg text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Don't have an account? 
+                        <a class="text-secondary font-bold hover:underline" href="#">Sign Up</a>
+</p>
+</footer>
+</div>
+<!-- Mini Footer -->
+<div class="mt-auto pt-lg flex flex-wrap gap-md justify-center lg:justify-start">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Contact Us</a>
+</div>
+</div>
+<!-- Right Section: Hero Image & Branding -->
+<div class="hidden lg:flex lg:w-[60%] relative overflow-hidden bg-primary-container">
+<!-- Background Image -->
+<div class="absolute inset-0 bg-cover bg-center opacity-70 mix-blend-overlay" data-alt="A panoramic, cinematic view of a luxury modern residential complex with clean lines, large glass windows, and lush landscaping during a golden hour sunset. The lighting is warm and inviting, highlighting architectural details in a professional SaaS real estate aesthetic. The scene reflects high-end living and authoritative market presence using a palette of deep blues, charcoal, and warm amber glows." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBVzPkANJ9gc5qFENDYz2uw3gWu7LIIR9mUjB1MTnZVaZCfI2aLTRcyc9adyu6qEeBYcIoASqmzOzldUo1xyNm5rEEGMaqCZMAMfPgnipNGHkgEdriKhBhsi5b92cCWDCL2MnZRECbtulWi8Was8J6FzmEn81ILmzaG8jqyXsx1aaWEykM3ksL2mOlOP537SRhWyyW-TS6rYIs_w1wN3HPO5fqRZWIz48ATzvidy_F8e2xm0njC133AMG5jrANhyZhBo7JF5g1hrTw')">
+</div>
+<!-- Overlay Content -->
+<div class="relative z-10 w-full h-full flex flex-col justify-end p-xl bg-gradient-to-t from-primary-container/80 to-transparent">
+<div class="max-w-xl">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-container/30 border border-secondary-fixed/20 backdrop-blur-md mb-md">
+<span class="material-symbols-outlined text-secondary-fixed text-[16px] mr-1" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-sm text-label-sm text-secondary-fixed">Verified Partner Portal</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-on-secondary-container mb-md leading-tight">
+                        Empowering Smarter Real Estate Decisions.
+                    </h2>
+<p class="font-body-lg text-body-lg text-on-primary-container/90 mb-xl">
+                        Join over 5,000 professionals using PropSpace to manage listings, track leads, and close high-value deals with precision data.
+                    </p>
+<!-- Stats / Bento Lite -->
+<div class="grid grid-cols-3 gap-md">
+<div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-md floating-interaction">
+<span class="block font-headline-md text-headline-md text-white">$2.4B+</span>
+<span class="block font-label-sm text-label-sm text-on-primary-container/70">Transactions</span>
+</div>
+<div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-md floating-interaction">
+<span class="block font-headline-md text-headline-md text-white">12k+</span>
+<span class="block font-label-sm text-label-sm text-on-primary-container/70">Active Listings</span>
+</div>
+<div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-md floating-interaction">
+<span class="block font-headline-md text-headline-md text-white">99.9%</span>
+<span class="block font-label-sm text-label-sm text-on-primary-container/70">Data Accuracy</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Ambient Animation Asset -->
+<div class="absolute top-0 right-0 w-full h-full pointer-events-none opacity-20">
+
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions for form inputs
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('scale-[1.01]');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+
+        // Toggle password visibility logic
+        const togglePass = document.querySelector('button .material-symbols-outlined');
+        const passInput = document.getElementById('password');
+        if (togglePass && passInput) {
+            togglePass.parentElement.addEventListener('click', () => {
+                const isPassword = passInput.type === 'password';
+                passInput.type = isPassword ? 'text' : 'password';
+                togglePass.textContent = isPassword ? 'visibility_off' : 'visibility';
+            });
+        }
+    </script>
+</body></html>
