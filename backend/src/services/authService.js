@@ -1,19 +1,48 @@
 import bcrypt from "bcryptjs";
-import { findByEmail, createUser } from "../repositories/userRepository.js";
+import { findByEmail, findByUsername, createUser } from "../repositories/userRepository.js";
 import generateToken from "../utils/generateToken.js";
 
 export const register = async(data)=>{
  const { username, email, password } = data;
 
- const exists =
+ if(!username || !email || !password){
+
+   throw new Error(
+     "Username, email and password are required"
+   );
+
+ }
+
+ if(password.length < 6){
+
+   throw new Error(
+     "Password must be at least 6 characters"
+   );
+
+ }
+
+ const emailTaken =
  await findByEmail(
    email
  );
 
- if(exists){
+ if(emailTaken){
 
    throw new Error(
      "User already exists"
+   );
+
+ }
+
+ const usernameTaken =
+ await findByUsername(
+   username
+ );
+
+ if(usernameTaken){
+
+   throw new Error(
+     "Username is already taken"
    );
 
  }
@@ -24,11 +53,20 @@ export const register = async(data)=>{
    10
  );
 
- return createUser({
+ const user = await createUser({
    username,
    email,
    password:hashed
  });
+
+ // Never return the password hash to the client.
+ return {
+   id:user._id,
+   username:user.username,
+   email:user.email,
+   phone:user.phone,
+   avatar:user.avatar
+ };
 
 };
 

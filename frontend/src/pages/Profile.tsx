@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../services/api";
+import InputField from "../components/InputField";
 
 export default function Profile() {
   const { user, updateUser } = useAuth();
@@ -47,9 +48,15 @@ export default function Profile() {
 
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
     setMessage("");
+
+    if (newPassword.length < 6) {
+      setError("New password must be at least 6 characters");
+      return;
+    }
+
+    setLoading(true);
 
     try {
       await api.put("/users/password", {
@@ -118,40 +125,22 @@ export default function Profile() {
           <div className="surface-card p-7 sm:p-8">
             <h2 className="text-lg font-bold text-slate-900 mb-6">Update Profile</h2>
             <form onSubmit={handleUpdateProfile} className="space-y-5">
-              <div>
-                <label className="field-label">
-                  Username
-                </label>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="field-input"
-                  required
-                />
-              </div>
-              <div>
-                <label className="field-label">
-                  Phone Number
-                </label>
-                <input
-                  type="text"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="field-input"
-                />
-              </div>
-              <div>
-                <label className="field-label">
-                  Avatar URL
-                </label>
-                <input
-                  type="text"
-                  value={avatar}
-                  onChange={(e) => setAvatar(e.target.value)}
-                  className="field-input"
-                />
-              </div>
+              <InputField
+                label="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+              <InputField
+                label="Phone Number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              <InputField
+                label="Avatar URL"
+                value={avatar}
+                onChange={(e) => setAvatar(e.target.value)}
+              />
 
               <button
                 type="submit"
@@ -167,30 +156,21 @@ export default function Profile() {
           <div className="surface-card p-7 sm:p-8">
             <h2 className="text-lg font-bold text-slate-900 mb-6">Change Password</h2>
             <form onSubmit={handleChangePassword} className="space-y-5">
-              <div>
-                <label className="field-label">
-                  Current Password
-                </label>
-                <input
-                  type="password"
-                  value={oldPassword}
-                  onChange={(e) => setOldPassword(e.target.value)}
-                  className="field-input"
-                  required
-                />
-              </div>
-              <div>
-                <label className="field-label">
-                  New Password
-                </label>
-                <input
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  className="field-input"
-                  required
-                />
-              </div>
+              <InputField
+                label="Current Password"
+                type="password"
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
+                required
+              />
+              <InputField
+                label="New Password"
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="At least 6 characters"
+                required
+              />
 
               <button
                 type="submit"

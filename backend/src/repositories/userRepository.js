@@ -7,6 +7,13 @@ export const findByEmail =
  });
 };
 
+export const findByUsername =
+(username)=>{
+ return User.findOne({
+   username
+ });
+};
+
 export const createUser =
 (data)=>{
  return User.create(
@@ -27,7 +34,7 @@ export const updateProfile =
    id,
    data,
    { new: true }
- );
+ ).select("-password");
 };
 
 export const updatePassword =
@@ -36,5 +43,5 @@ export const updatePassword =
    id,
    { password },
    { new: true }
- );
+ ).select("-password");
 };

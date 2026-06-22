@@ -1,8 +1,16 @@
 import api from "./api";
 
-export const getProperties = async (city = "") => {
+export type PropertyFilters = {
+  city?: string;
+  minPrice?: string;
+  maxPrice?: string;
+};
+
+export const getProperties = async (filters: PropertyFilters = {}) => {
   const params = new URLSearchParams();
-  if (city) params.append("city", city);
+  if (filters.city) params.append("city", filters.city);
+  if (filters.minPrice) params.append("minPrice", filters.minPrice);
+  if (filters.maxPrice) params.append("maxPrice", filters.maxPrice);
   const res = await api.get(`/properties${params.toString() ? `?${params}` : ""}`);
   return res.data;
 };

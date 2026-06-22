@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import InputField from "../components/InputField";
 
 export default function Register() {
   const nav = useNavigate();
@@ -13,11 +14,22 @@ export default function Register() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
 
+    // Catch obviously broken input before it ever hits the network.
+    if (!username.trim() || !email.trim() || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      await auth.register(username, email, password);
+      await auth.register(username.trim(), email.trim(), password);
       nav("/login");
     } catch (err: any) {
       setError(
@@ -49,47 +61,31 @@ export default function Register() {
           )}
 
           <form onSubmit={submit} className="space-y-5">
-            <div>
-              <label className="field-label">
-                Username
-              </label>
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="field-input"
-                placeholder="Your username"
-                required
-              />
-            </div>
+            <InputField
+              label="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Your username"
+              required
+            />
 
-            <div>
-              <label className="field-label">
-                Email Address
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="field-input"
-                placeholder="you@example.com"
-                required
-              />
-            </div>
+            <InputField
+              label="Email Address"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              required
+            />
 
-            <div>
-              <label className="field-label">
-                Password
-              </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="field-input"
-                placeholder="Create a password"
-                required
-              />
-            </div>
+            <InputField
+              label="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="At least 6 characters"
+              required
+            />
 
             <button
               type="submit"

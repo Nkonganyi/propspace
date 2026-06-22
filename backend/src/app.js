@@ -10,6 +10,8 @@ from "./routes/userRoutes.js";
 import propertyRoutes
 from "./routes/propertyRoutes.js";
 
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+
 const app =
 express();
 
@@ -35,5 +37,8 @@ app.use(
  "/api/properties",
  propertyRoutes
 );
+
+app.use(notFound);
+app.use(errorHandler);
 
 export default app;

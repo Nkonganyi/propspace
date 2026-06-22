@@ -2,20 +2,31 @@ import { useEffect, useMemo, useState } from "react";
 import { getMine } from "../services/propertyService";
 import PropertyCard from "../components/PropertyCard";
 import Loader from "../components/Loader";
+import EmptyState from "../components/EmptyState";
+import ErrorState from "../components/ErrorState";
 import type { Property } from "../types/Property";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function MyListings() {
   const [data, setData] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const nav = useNavigate();
 
-  useEffect(() => {
-    const load = async () => {
-      setLoading(true);
+  const load = async () => {
+    setLoading(true);
+    setError(false);
+    try {
       const res = await getMine();
       setData(res);
+    } catch {
+      setError(true);
+    } finally {
       setLoading(false);
-    };
+    }
+  };
+
+  useEffect(() => {
     load();
   }, []);
 
@@ -47,7 +58,7 @@ export default function MyListings() {
         </div>
 
         {/* Statistics cards */}
-        {!loading && data.length > 0 && (
+        {!loading && !error && data.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
             <div className="surface-card p-6">
               <p className="text-sm font-semibold text-slate-500 mb-1">Total Listings</p>
@@ -72,25 +83,19 @@ export default function MyListings() {
           <div className="flex items-center justify-center py-20">
             <Loader />
           </div>
+        ) : error ? (
+          <ErrorState
+            message="We couldn't reach the server to load your listings."
+            onRetry={load}
+          />
         ) : !data.length ? (
-          <div className="relative text-center py-20 px-6 surface-card overflow-hidden">
-            <div className="blob absolute -top-10 left-1/2 -translate-x-1/2 w-48 h-48 bg-primary-100"></div>
-            <div className="relative z-10">
-              <div className="w-20 h-20 mx-auto rounded-2xl bg-primary-50 flex items-center justify-center text-4xl mb-6">
-                🏠
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">
-                You haven't listed any properties yet
-              </h3>
-              <p className="text-slate-500 mb-6">Create your first listing to get started!</p>
-              <Link
-                to="/create"
-                className="btn btn-primary inline-flex"
-              >
-                Create First Listing
-              </Link>
-            </div>
-          </div>
+          <EmptyState
+            icon="🏠"
+            title="You haven't listed any properties yet"
+            description="Create your first listing to get started!"
+            actionLabel="Create First Listing"
+            onAction={() => nav("/create")}
+          />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
             {data.map((property) => (

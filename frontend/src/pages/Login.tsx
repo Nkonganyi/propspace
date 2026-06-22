@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import InputField from "../components/InputField";
 
 export default function Login() {
   const auth = useAuth();
@@ -47,33 +48,23 @@ export default function Login() {
         )}
 
         <form onSubmit={submit} className="space-y-5">
-          <div>
-            <label className="field-label">
-              Email Address
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="field-input"
-              placeholder="you@example.com"
-              required
-            />
-          </div>
+          <InputField
+            label="Email Address"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            required
+          />
 
-          <div>
-            <label className="field-label">
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="field-input"
-              placeholder="Enter your password"
-              required
-            />
-          </div>
+          <InputField
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            required
+          />
 
           <button
             type="submit"

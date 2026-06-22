@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createProperty } from "../services/propertyService";
+import InputField from "../components/InputField";
 
 export default function CreateProperty() {
   const nav = useNavigate();
@@ -11,8 +12,8 @@ export default function CreateProperty() {
     city: "",
     country: "",
     propertyType: "Apartment",
-    images: [""],
   });
+  const [images, setImages] = useState<string[]>([""]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -20,11 +21,27 @@ export default function CreateProperty() {
     setForm({ ...form, [field]: value });
   };
 
+  const updateImage = (index: number, value: string) => {
+    const next = [...images];
+    next[index] = value;
+    setImages(next);
+  };
+
+  const addImageField = () => setImages([...images, ""]);
+
+  const removeImageField = (index: number) => {
+    setImages(images.filter((_, i) => i !== index));
+  };
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!form.title || !form.city || !form.price || !form.description || !form.country) {
+    if (!form.title.trim() || !form.city.trim() || !form.description.trim() || !form.country.trim()) {
       setError("Please fill in all required fields");
+      return;
+    }
+    if (!form.price || form.price <= 0) {
+      setError("Please enter a valid price greater than 0");
       return;
     }
 
@@ -32,7 +49,8 @@ export default function CreateProperty() {
     setError("");
 
     try {
-      await createProperty(form);
+      const cleanImages = images.map((url) => url.trim()).filter(Boolean);
+      await createProperty({ ...form, images: cleanImages });
       nav("/mine");
     } catch (err: any) {
       setError(err.response?.data?.error || "Failed to create listing");
@@ -65,17 +83,13 @@ export default function CreateProperty() {
                 Basic Information
               </h2>
               <div className="space-y-5">
-                <div>
-                  <label className="field-label">
-                    Property Title
-                  </label>
-                  <input
-                    className="field-input"
-                    placeholder="Beautiful Modern Apartment"
-                    onChange={(e) => update("title", e.target.value)}
-                    value={form.title}
-                  />
-                </div>
+                <InputField
+                  label="Property Title"
+                  placeholder="Beautiful Modern Apartment"
+                  onChange={(e) => update("title", e.target.value)}
+                  value={form.title}
+                  required
+                />
 
                 <div>
                   <label className="field-label">
@@ -100,18 +114,15 @@ export default function CreateProperty() {
                 Pricing & Type
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="field-label">
-                    Price ($)
-                  </label>
-                  <input
-                    type="number"
-                    className="field-input"
-                    placeholder="250000"
-                    onChange={(e) => update("price", Number(e.target.value))}
-                    value={form.price || ""}
-                  />
-                </div>
+                <InputField
+                  label="Price ($)"
+                  type="number"
+                  min={1}
+                  placeholder="250000"
+                  onChange={(e) => update("price", Number(e.target.value))}
+                  value={form.price || ""}
+                  required
+                />
 
                 <div>
                   <label className="field-label">
@@ -138,29 +149,21 @@ export default function CreateProperty() {
                 Location
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="field-label">
-                    City
-                  </label>
-                  <input
-                    className="field-input"
-                    placeholder="New York"
-                    onChange={(e) => update("city", e.target.value)}
-                    value={form.city}
-                  />
-                </div>
+                <InputField
+                  label="City"
+                  placeholder="New York"
+                  onChange={(e) => update("city", e.target.value)}
+                  value={form.city}
+                  required
+                />
 
-                <div>
-                  <label className="field-label">
-                    Country
-                  </label>
-                  <input
-                    className="field-input"
-                    placeholder="United States"
-                    onChange={(e) => update("country", e.target.value)}
-                    value={form.country}
-                  />
-                </div>
+                <InputField
+                  label="Country"
+                  placeholder="United States"
+                  onChange={(e) => update("country", e.target.value)}
+                  value={form.country}
+                  required
+                />
               </div>
             </div>
 
@@ -171,29 +174,53 @@ export default function CreateProperty() {
               <h2 className="text-sm font-semibold text-primary uppercase tracking-wide mb-5">
                 Photos
               </h2>
-              <div>
-                <label className="field-label">
-                  Image URL
-                </label>
-                <input
-                  type="text"
-                  className="field-input"
-                  placeholder="https://example.com/property.jpg"
-                  onChange={(e) => update("images", [e.target.value])}
-                  value={form.images[0]}
-                />
+              <div className="space-y-3">
+                {images.map((url, index) => (
+                  <div key={index} className="flex gap-3 items-start">
+                    <div className="flex-1">
+                      <input
+                        type="text"
+                        className="field-input"
+                        placeholder="https://example.com/property.jpg"
+                        onChange={(e) => updateImage(index, e.target.value)}
+                        value={url}
+                      />
+                    </div>
+                    {images.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removeImageField(index)}
+                        className="btn btn-ghost px-3.5 py-3.5 text-error-600 shrink-0"
+                        aria-label="Remove image"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
+                ))}
+
+                <button
+                  type="button"
+                  onClick={addImageField}
+                  className="text-sm font-semibold text-primary hover:underline transition-all duration-200"
+                >
+                  ➕ Add another image
+                </button>
               </div>
 
-              {form.images[0] && (
-                <div className="pt-4">
-                  <img
-                    src={form.images[0]}
-                    alt="Property Preview"
-                    className="w-full h-64 object-cover rounded-xl border border-slate-200"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = "none";
-                    }}
-                  />
+              {images.some((u) => u.trim()) && (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-5">
+                  {images.filter((u) => u.trim()).map((url, i) => (
+                    <img
+                      key={i}
+                      src={url}
+                      alt={`Property preview ${i + 1}`}
+                      className="w-full h-28 object-cover rounded-xl border border-slate-200"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = "none";
+                      }}
+                    />
+                  ))}
                 </div>
               )}
             </div>
