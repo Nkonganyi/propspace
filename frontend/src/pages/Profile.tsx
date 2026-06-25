@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../services/api";
 import InputField from "../components/InputField";
+import ImageUploadInput from "../components/ImageUploadInput";
+import { PhoneIcon, CheckCircleIcon, AlertCircleIcon } from "../components/icons";
 
 export default function Profile() {
   const { user, updateUser } = useAuth();
@@ -102,7 +104,7 @@ export default function Profile() {
             <p className="text-slate-500 mt-1">{user?.email}</p>
             {user?.phone && (
               <p className="text-slate-500 mt-1 flex items-center justify-center sm:justify-start gap-1.5">
-                <span>📞</span> {user.phone}
+                <PhoneIcon className="w-4 h-4" /> {user.phone}
               </p>
             )}
           </div>
@@ -110,13 +112,13 @@ export default function Profile() {
 
         {message && (
           <div className="alert-success mb-6">
-            <span>✅</span> {message}
+            <CheckCircleIcon className="w-4 h-4 shrink-0" /> {message}
           </div>
         )}
 
         {error && (
           <div className="alert-error mb-6">
-            <span>❌</span> {error}
+            <AlertCircleIcon className="w-4 h-4 shrink-0" /> {error}
           </div>
         )}
 
@@ -136,10 +138,11 @@ export default function Profile() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
-              <InputField
-                label="Avatar URL"
+              <ImageUploadInput
+                label="Avatar"
                 value={avatar}
-                onChange={(e) => setAvatar(e.target.value)}
+                onChange={setAvatar}
+                placeholder="https://example.com/avatar.jpg"
               />
 
               <button

@@ -1,5 +1,6 @@
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { PhoneIcon, PlusIcon, HomeIcon, SettingsIcon, LogOutIcon } from "../components/icons";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -42,7 +43,7 @@ export default function Dashboard() {
               <p className="text-slate-500 mt-1">{user?.email}</p>
               {user?.phone && (
                 <p className="text-slate-500 mt-1 flex items-center gap-1.5">
-                  <span>📞</span> {user.phone}
+                  <PhoneIcon className="w-4 h-4" /> {user.phone}
                 </p>
               )}
             </div>
@@ -63,8 +64,8 @@ export default function Dashboard() {
               to="/create"
               className="surface-card surface-card-hover flex flex-col items-center justify-center gap-3 px-6 py-8 text-center"
             >
-              <span className="w-12 h-12 rounded-xl bg-primary-50 text-primary flex items-center justify-center text-2xl">
-                ➕
+              <span className="w-12 h-12 rounded-xl bg-primary-50 text-primary flex items-center justify-center">
+                <PlusIcon className="w-6 h-6" />
               </span>
               <span className="font-semibold text-slate-900">Create New Listing</span>
             </Link>
@@ -72,8 +73,8 @@ export default function Dashboard() {
               to="/mine"
               className="surface-card surface-card-hover flex flex-col items-center justify-center gap-3 px-6 py-8 text-center"
             >
-              <span className="w-12 h-12 rounded-xl bg-accent-50 text-accent-600 flex items-center justify-center text-2xl">
-                🏠
+              <span className="w-12 h-12 rounded-xl bg-accent-50 text-accent-600 flex items-center justify-center">
+                <HomeIcon className="w-6 h-6" />
               </span>
               <span className="font-semibold text-slate-900">My Listings</span>
             </Link>
@@ -81,8 +82,8 @@ export default function Dashboard() {
               to="/profile"
               className="surface-card surface-card-hover flex flex-col items-center justify-center gap-3 px-6 py-8 text-center"
             >
-              <span className="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center text-2xl">
-                ⚙️
+              <span className="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center">
+                <SettingsIcon className="w-6 h-6" />
               </span>
               <span className="font-semibold text-slate-900">Manage Profile</span>
             </Link>
@@ -95,7 +96,7 @@ export default function Dashboard() {
             onClick={logout}
             className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-error-600 rounded-xl border border-error-200 hover:bg-error-50 transition-all duration-200 ease-in-out"
           >
-            <span>🚪</span> Log Out
+            <LogOutIcon className="w-4 h-4" /> Log Out
           </button>
         </div>
       </div>

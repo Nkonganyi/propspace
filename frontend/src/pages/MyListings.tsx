@@ -6,6 +6,7 @@ import EmptyState from "../components/EmptyState";
 import ErrorState from "../components/ErrorState";
 import type { Property } from "../types/Property";
 import { Link, useNavigate } from "react-router-dom";
+import { PlusIcon, HomeIcon } from "../components/icons";
 
 export default function MyListings() {
   const [data, setData] = useState<Property[]>([]);
@@ -53,7 +54,7 @@ export default function MyListings() {
             to="/create"
             className="btn btn-primary"
           >
-            ➕ New Listing
+            <PlusIcon className="w-4 h-4" /> New Listing
           </Link>
         </div>
 
@@ -90,7 +91,7 @@ export default function MyListings() {
           />
         ) : !data.length ? (
           <EmptyState
-            icon="🏠"
+            icon={<HomeIcon className="w-9 h-9" />}
             title="You haven't listed any properties yet"
             description="Create your first listing to get started!"
             actionLabel="Create First Listing"

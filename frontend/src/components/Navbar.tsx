@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
+import { Logo, LogOutIcon } from "./icons";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -42,8 +43,8 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-xl shadow-sm transition-transform duration-200 group-hover:scale-105">
-              🏘️
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white shadow-sm transition-transform duration-200 group-hover:scale-105">
+              <Logo className="w-5 h-5" />
             </div>
             <span className="text-2xl font-extrabold text-slate-900 tracking-tight">
               PropSpace
@@ -68,8 +69,9 @@ export default function Navbar() {
                 </Link>
                 <button
                   onClick={logoutAndCloseMenu}
-                  className="ml-4 px-5 py-2.5 text-sm font-semibold rounded-xl text-error-600 hover:bg-error-50 transition-all duration-200 ease-in-out"
+                  className="ml-4 flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold rounded-xl text-error-600 hover:bg-error-50 transition-all duration-200 ease-in-out"
                 >
+                  <LogOutIcon className="w-4 h-4" />
                   Logout
                 </button>
               </>
@@ -172,8 +174,9 @@ export default function Navbar() {
                 </Link>
                 <button
                   onClick={logoutAndCloseMenu}
-                  className="block w-full text-left px-4 py-2.5 text-base font-semibold rounded-xl text-error-600 hover:bg-error-50 transition-all duration-200 ease-in-out"
+                  className="flex items-center gap-1.5 w-full text-left px-4 py-2.5 text-base font-semibold rounded-xl text-error-600 hover:bg-error-50 transition-all duration-200 ease-in-out"
                 >
+                  <LogOutIcon className="w-4 h-4" />
                   Logout
                 </button>
               </>

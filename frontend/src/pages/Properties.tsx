@@ -7,6 +7,7 @@ import FilterBar from "../components/FilterBar";
 import EmptyState from "../components/EmptyState";
 import ErrorState from "../components/ErrorState";
 import type { Property } from "../types/Property";
+import { Logo, SearchIcon } from "../components/icons";
 
 const PropertyCardSkeleton = () => (
   <div className="surface-card overflow-hidden animate-pulse">
@@ -28,19 +29,16 @@ const CATEGORIES = [
   {
     type: "Apartment",
     label: "Apartments",
-    emoji: "🏙️",
     image: "https://images.unsplash.com/photo-1752293451299-fca611e46389?auto=format&fit=crop&w=900&q=80",
   },
   {
     type: "House",
     label: "Houses",
-    emoji: "🏡",
     image: "https://images.unsplash.com/photo-1760067537293-6b30141d6a52?auto=format&fit=crop&w=900&q=80",
   },
   {
     type: "Studio",
     label: "Studios",
-    emoji: "🛋️",
     image: "https://images.unsplash.com/photo-1748679767437-00b5c0327b1a?auto=format&fit=crop&w=900&q=80",
   },
 ];
@@ -173,7 +171,6 @@ export default function Properties() {
                 ></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/30 to-slate-900/10"></div>
                 <div className="relative h-full p-6 flex flex-col justify-end">
-                  <span className="absolute top-5 right-5 text-3xl drop-shadow-md">{cat.emoji}</span>
                   <span className="text-white text-xl font-bold drop-shadow-sm">{cat.label}</span>
                   <span className="text-white/80 text-sm">
                     {categoryCounts[cat.type] || 0} Properties
@@ -218,7 +215,7 @@ export default function Properties() {
             />
           ) : !visibleData.length ? (
             <EmptyState
-              icon="🏚️"
+              icon={<SearchIcon className="w-9 h-9" />}
               title="No Properties Found"
               description={
                 city || minPrice || maxPrice
@@ -274,7 +271,7 @@ export default function Properties() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="text-2xl font-extrabold text-white mb-4 flex items-center gap-3">
-                <span className="text-3xl">🏘️</span>
+                <Logo className="w-7 h-7" />
                 PropSpace
               </div>
               <p className="text-slate-400 mb-6 max-w-md">

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createProperty } from "../services/propertyService";
 import InputField from "../components/InputField";
+import ImageUploadInput from "../components/ImageUploadInput";
+import { AlertCircleIcon, PlusIcon, XIcon, ImageIcon } from "../components/icons";
 
 export default function CreateProperty() {
   const nav = useNavigate();
@@ -72,7 +74,7 @@ export default function CreateProperty() {
 
           {error && (
             <div className="alert-error mb-8">
-              <span>❌</span> {error}
+              <AlertCircleIcon className="w-4 h-4 shrink-0" /> {error}
             </div>
           )}
 
@@ -171,29 +173,27 @@ export default function CreateProperty() {
 
             {/* Section: Photos */}
             <div>
-              <h2 className="text-sm font-semibold text-primary uppercase tracking-wide mb-5">
-                Photos
+              <h2 className="text-sm font-semibold text-primary uppercase tracking-wide mb-5 flex items-center gap-2">
+                <ImageIcon className="w-4 h-4" /> Photos
               </h2>
-              <div className="space-y-3">
+              <div className="space-y-5">
                 {images.map((url, index) => (
                   <div key={index} className="flex gap-3 items-start">
                     <div className="flex-1">
-                      <input
-                        type="text"
-                        className="field-input"
-                        placeholder="https://example.com/property.jpg"
-                        onChange={(e) => updateImage(index, e.target.value)}
+                      <ImageUploadInput
+                        label={`Image ${index + 1}`}
                         value={url}
+                        onChange={(value) => updateImage(index, value)}
                       />
                     </div>
                     {images.length > 1 && (
                       <button
                         type="button"
                         onClick={() => removeImageField(index)}
-                        className="btn btn-ghost px-3.5 py-3.5 text-error-600 shrink-0"
+                        className="btn btn-ghost px-3.5 py-3.5 text-error-600 shrink-0 mt-7"
                         aria-label="Remove image"
                       >
-                        ✕
+                        <XIcon className="w-4 h-4" />
                       </button>
                     )}
                   </div>
@@ -202,27 +202,11 @@ export default function CreateProperty() {
                 <button
                   type="button"
                   onClick={addImageField}
-                  className="text-sm font-semibold text-primary hover:underline transition-all duration-200"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline transition-all duration-200"
                 >
-                  ➕ Add another image
+                  <PlusIcon className="w-4 h-4" /> Add another image
                 </button>
               </div>
-
-              {images.some((u) => u.trim()) && (
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-5">
-                  {images.filter((u) => u.trim()).map((url, i) => (
-                    <img
-                      key={i}
-                      src={url}
-                      alt={`Property preview ${i + 1}`}
-                      className="w-full h-28 object-cover rounded-xl border border-slate-200"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = "none";
-                      }}
-                    />
-                  ))}
-                </div>
-              )}
             </div>
 
             <button

@@ -1,3 +1,5 @@
+import { LocationPinIcon, HomeIcon, DollarIcon, SearchIcon } from "./icons";
+
 type FilterBarProps = {
   city: string;
   onCityChange: (value: string) => void;
@@ -30,7 +32,7 @@ export default function FilterBar({
       <div className="bg-white rounded-2xl shadow-xl p-2 flex flex-col lg:flex-row lg:items-center gap-1.5">
         {/* Location */}
         <div className="flex items-center gap-2 px-4 py-3 flex-1 min-w-0">
-          <span className="text-slate-400 shrink-0" aria-hidden="true">📍</span>
+          <LocationPinIcon className="w-4 h-4 text-slate-400 shrink-0" />
           <input
             type="text"
             className="w-full bg-transparent text-sm text-slate-900 placeholder-slate-400 focus:outline-none"
@@ -44,7 +46,7 @@ export default function FilterBar({
 
         {/* Property type */}
         <div className="flex items-center gap-2 px-4 py-3 lg:w-44 shrink-0">
-          <span className="text-slate-400 shrink-0" aria-hidden="true">🏠</span>
+          <HomeIcon className="w-4 h-4 text-slate-400 shrink-0" />
           <select
             className="w-full bg-transparent text-sm text-slate-900 focus:outline-none appearance-none"
             value={typeFilter}
@@ -62,7 +64,7 @@ export default function FilterBar({
 
         {/* Price range */}
         <div className="flex items-center gap-2 px-4 py-3 lg:w-56 shrink-0">
-          <span className="text-slate-400 shrink-0" aria-hidden="true">💰</span>
+          <DollarIcon className="w-4 h-4 text-slate-400 shrink-0" />
           <input
             type="number"
             min={0}
@@ -83,7 +85,7 @@ export default function FilterBar({
         </div>
 
         <button type="submit" className="btn btn-primary py-3.5 px-7 shrink-0">
-          <span aria-hidden="true">🔍</span> Search
+          <SearchIcon className="w-4 h-4" /> Search
         </button>
       </div>
     </form>

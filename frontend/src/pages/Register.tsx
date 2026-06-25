@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import InputField from "../components/InputField";
+import { Logo, AlertCircleIcon } from "../components/icons";
 
 export default function Register() {
   const nav = useNavigate();
@@ -56,7 +57,7 @@ export default function Register() {
 
           {error && (
             <div className="alert-error mb-6">
-              <span>❌</span> {error}
+              <AlertCircleIcon className="w-4 h-4 shrink-0" /> {error}
             </div>
           )}
 
@@ -121,8 +122,8 @@ export default function Register() {
           <div className="blob absolute top-1/3 left-1/4 w-24 h-24 bg-white/15"></div>
 
           <div className="relative z-10 text-center text-white space-y-6">
-            <div className="w-20 h-20 mx-auto rounded-3xl bg-white/15 backdrop-blur-sm flex items-center justify-center text-5xl shadow-lg">
-              🏡
+            <div className="w-20 h-20 mx-auto rounded-3xl bg-white/15 backdrop-blur-sm flex items-center justify-center shadow-lg">
+              <Logo className="w-10 h-10" />
             </div>
             <h2 className="text-3xl font-extrabold leading-tight">
               Your Journey<br />Starts Here

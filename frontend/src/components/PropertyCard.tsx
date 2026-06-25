@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Property } from "../types/Property";
 import { deleteProperty, updateProperty } from "../services/propertyService";
 import { useNavigate, useLocation } from "react-router-dom";
+import { LocationPinIcon, EditIcon, TrashIcon } from "./icons";
 
 export default function PropertyCard({ property }: { property: Property }) {
   const nav = useNavigate();
@@ -83,7 +84,7 @@ export default function PropertyCard({ property }: { property: Property }) {
             </p>
 
             <span className="badge badge-neutral mt-3 self-start">
-              <span aria-hidden="true">📍</span>
+              <LocationPinIcon className="w-3.5 h-3.5" />
               {property.city}, {property.country}
             </span>
 
@@ -99,14 +100,14 @@ export default function PropertyCard({ property }: { property: Property }) {
                   onClick={() => setIsEditing(true)}
                   className="btn btn-secondary flex-1 py-2.5 text-sm"
                 >
-                  Edit
+                  <EditIcon className="w-3.5 h-3.5" /> Edit
                 </button>
                 <button
                   onClick={remove}
                   disabled={loading}
                   className="btn btn-danger flex-1 py-2.5 text-sm"
                 >
-                  {loading ? "Deleting..." : "Delete"}
+                  <TrashIcon className="w-3.5 h-3.5" /> {loading ? "Deleting..." : "Delete"}
                 </button>
               </div>
             )}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import InputField from "../components/InputField";
+import { Logo, AlertCircleIcon } from "../components/icons";
 
 export default function Login() {
   const auth = useAuth();
@@ -30,8 +31,8 @@ export default function Login() {
     <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12 sm:py-20">
       <div className="max-w-md w-full bg-white rounded-3xl shadow-xl border border-slate-200 p-8 sm:p-10 animate-fade-in">
         <div className="text-center mb-10">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-2xl shadow-lg mx-auto mb-6">
-            🏘️
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white shadow-lg mx-auto mb-6">
+            <Logo className="w-8 h-8" />
           </div>
           <h1 className="text-3xl font-extrabold text-slate-900 mb-3">
             Welcome Back!
@@ -43,7 +44,7 @@ export default function Login() {
 
         {error && (
           <div className="alert-error mb-6">
-            <span>❌</span> {error}
+            <AlertCircleIcon className="w-4 h-4 shrink-0" /> {error}
           </div>
         )}
 
